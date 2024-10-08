@@ -26,6 +26,7 @@ struct TaskListView: View {
                                }
                           }
                       }
+                      .onDelete(perform: deleteTask )
                   }
                   .navigationTitle("Tasks")
                   .toolbar {
@@ -42,6 +43,12 @@ struct TaskListView: View {
                   }
               }
           }
+    private func deleteTask(at offsets: IndexSet) {
+            for index in offsets {
+                let task = viewModel.tasks[index]
+                viewModel.deleteTask(task: task)
+            }
+        }
 }
 #Preview {
     TaskListView(viewModel: TaskViewModel())
